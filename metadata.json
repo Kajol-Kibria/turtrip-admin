@@ -1,0 +1,6 @@
+{
+  "name": "Manjaro Admin Panel",
+  "description": "Comprehensive administrative dashboard for Manjaro, managing users, guides, bookings, payments, and content moderation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-saffron: #FB8500;
+  --color-earth: #023E8A;
+  --color-teal: #80B918;
+  --color-coral: #FB5607;
+  --color-warm: #F0FAFF;
+  
+  /* Mapping brand colors to utility names - Swapped as requested */
+  --color-primary: var(--color-earth);   /* #023E8A - Deep Blue for CTAs */
+  --color-brand: var(--color-saffron);   /* #FB8500 - Orange for Highlights */
+  --color-success: var(--color-teal);
+  --color-alert: var(--color-coral);
+}
+
+@layer base {
+  body {
+    @apply bg-warm text-earth antialiased;
+  }
+}
+
+.glass-card {
+  @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-sm transition-all duration-300;
+}
+
+.glass-card:hover {
+  @apply shadow-lg border-primary/20;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-200 rounded-full hover:bg-slate-300;
+}
