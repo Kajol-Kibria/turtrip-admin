@@ -59,7 +59,7 @@ const EmergencyResponseView = () => {
 
     <div className="lg:col-span-2 glass-card rounded-[40px] overflow-hidden bg-white shadow-2xl shadow-slate-200/40 border-none flex flex-col min-h-[600px]">
       {selectedSOS ? <>
-        <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-white">
+        <div className="p-4 sm:p-8 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white">
           <div className="flex items-center gap-6">
             <div className="w-16 h-16 rounded-2xl bg-coral/10 text-coral flex items-center justify-center font-black shadow-xl">SOS</div>
             <div>
@@ -67,16 +67,16 @@ const EmergencyResponseView = () => {
               <p className="text-sm font-medium text-slate-400 mt-1">Live tracking active via Manjaro Safety Protocol</p>
             </div>
           </div>
-          <div className="flex gap-2">
-            <button className="bg-coral text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-coral/20">Emergency Dispatch</button>
+          <div className="flex gap-2 w-full sm:w-auto">
+            <button className="flex-1 sm:flex-none bg-coral text-white px-4 sm:px-8 py-3 sm:py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-coral/20">Emergency Dispatch</button>
           </div>
         </div>
 
-        <div className="flex-1 p-8 space-y-8 bg-warm/10 relative overflow-hidden">
+        <div className="flex-1 p-4 sm:p-8 space-y-6 sm:space-y-8 bg-warm/10 relative overflow-hidden">
           {
             /* Live Tracking Map Mockup */
           }
-          <div className="h-64 bg-slate-900 rounded-[32px] relative overflow-hidden shadow-2xl border-4 border-white">
+          <div className="h-48 sm:h-64 bg-slate-900 rounded-[24px] sm:rounded-[32px] relative overflow-hidden shadow-2xl border-4 border-white">
             <div className="absolute inset-0 opacity-40 grayscale blur-[1px]">
               <img src="https://picsum.photos/seed/map-emergency/800/400" className="w-full h-full object-cover" />
             </div>
@@ -88,7 +88,7 @@ const EmergencyResponseView = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div className="bg-white p-6 rounded-3xl shadow-xl border border-earth/5 space-y-4">
               <h5 className="text-[10px] font-black uppercase tracking-widest text-slate-400">Associated Traveler</h5>
               <div className="flex items-center gap-3">
@@ -122,9 +122,9 @@ const EmergencyResponseView = () => {
           </div>
         </div>
 
-        <div className="p-8 border-t border-slate-100 bg-white flex gap-4">
-          <button className="flex-1 bg-warm text-earth py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-100 transition-all">Close as Resolved</button>
-          <button className="flex-1 bg-earth text-white py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-earth/20 hover:bg-earth/90 transition-all">Escalate to Legal</button>
+        <div className="p-4 sm:p-8 border-t border-slate-100 bg-white flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <button className="flex-1 bg-warm text-earth py-3 sm:py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-100 transition-all">Close as Resolved</button>
+          <button className="flex-1 bg-earth text-white py-3 sm:py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-earth/20 hover:bg-earth/90 transition-all">Escalate to Legal</button>
         </div>
       </> : <div className="flex-1 flex flex-col items-center justify-center text-center p-20 opacity-30">
         <ShieldAlert size={64} className="mb-4 text-slate-300" />

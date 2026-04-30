@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 const DisputeManagementView = () => {
   const [selectedCase, setSelectedCase] = useState({ id: "DP-001", user: "John Doe", guide: "Ahmed Khan", status: "Open", lastMessage: "The guide never showed up at the meeting point." });
-  return <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 h-[calc(100vh-200px)]">
+  return <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 lg:h-[calc(100vh-200px)]">
     <div className="glass-card rounded-3xl overflow-hidden flex flex-col border-none shadow-xl shadow-slate-200/40 bg-white">
       <div className="p-6 border-b border-slate-100 bg-white flex justify-between items-center">
         <div>
@@ -44,9 +44,9 @@ const DisputeManagementView = () => {
     </div>
 
     <div className="lg:col-span-2 glass-card rounded-3xl overflow-hidden flex flex-col border-none shadow-xl shadow-slate-200/40 bg-white relative">
-      <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-white sticky top-0 z-10 shadow-sm shadow-slate-500/5">
+      <div className="p-8 border-b border-slate-100 flex flex-col sm:flex-row gap-2  justify-between items-center bg-white sticky top-0 z-10 shadow-sm shadow-slate-500/5">
         <div className="flex items-center gap-5">
-          <div className="w-14 h-14 rounded-2xl bg-warm flex items-center justify-center font-black text-earth border-2 border-white shadow-xl">JD</div>
+          <div className="w-14 h-14 rounded-2xl bg-warm flex flex-shrink-0 items-center justify-center font-black text-earth border-2 border-white shadow-xl">JD</div>
           <div>
             <h4 className="text-lg font-black text-earth tracking-tight">Adjudication Detail: John Doe</h4>
             <p className="text-xs text-slate-400 font-medium flex items-center gap-2">
@@ -54,13 +54,13 @@ const DisputeManagementView = () => {
             </p>
           </div>
         </div>
-        <div className="flex gap-2">
-          <button className="bg-coral text-white px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-coral/90 shadow-xl shadow-coral/20">Full Refund</button>
-          <button className="bg-earth text-white px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-earth/90 shadow-xl shadow-earth/20">Rule for Partner</button>
+        <div className="flex gap-2 w-full md:w-auto md:flex-row">
+          <button className="w-full md:w-auto bg-coral text-white px-4 sm:px-6 py-2 sm:py-3 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-coral/90 shadow-xl shadow-coral/20">Full Refund</button>
+          <button className="w-full md:w-auto bg-earth text-white px-4 sm:px-6 py-2 sm:py-3 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-earth/90 shadow-xl shadow-earth/20">Rule for Partner</button>
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-10 space-y-8 bg-warm/10">
+      <div className="flex-1 overflow-y-auto p-4 sm:p-10 space-y-6 sm:space-y-8 bg-warm/10">
         <div className="flex gap-4">
           <div className="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-black flex-none">U</div>
           <div className="bg-white p-6 rounded-3xl rounded-tl-none shadow-xl border border-earth/5 max-w-[85%]">
@@ -68,7 +68,7 @@ const DisputeManagementView = () => {
             <p className="text-sm text-earth leading-relaxed font-medium">
               The guide Ahmed hasn't arrived at the Burj Khalifa entrance. I've been waiting for nearly an hour and he's not picking up my calls. See attached evidence of my presence at the location.
             </p>
-            <div className="mt-4 grid grid-cols-3 gap-3">
+            <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-3">
               <div className="aspect-square bg-slate-200 rounded-2xl overflow-hidden relative group cursor-pointer">
                 <div className="absolute inset-0 bg-earth/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                   <Eye size={20} className="text-white" />
@@ -95,14 +95,14 @@ const DisputeManagementView = () => {
         </div>
       </div>
 
-      <div className="p-8 border-t border-slate-100 bg-white">
-        <div className="flex gap-4 items-center bg-warm/50 p-3 rounded-2xl border border-earth/5">
+      <div className="p-4 sm:p-8 border-t border-slate-100 bg-white">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center bg-warm/50 p-2 sm:p-3 rounded-2xl border border-earth/5">
           <input
             type="text"
             placeholder="Post Adjudication Notice / Moderator Intervenstion..."
             className="flex-1 bg-transparent border-none focus:ring-0 text-sm px-4 font-medium"
           />
-          <button className="bg-earth text-white px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-earth/90 transition-all shadow-xl shadow-earth/20">Send Directive</button>
+          <button className="bg-earth text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-earth/90 transition-all shadow-xl shadow-earth/20 w-full sm:w-auto">Send Directive</button>
         </div>
       </div>
     </div>

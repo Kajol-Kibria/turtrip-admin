@@ -13,9 +13,10 @@ import {
   Shield,
   UserCog,
   FileCheck,
-  Smartphone
+  Smartphone,
+  MessageSquare
 } from "lucide-react";
-const DriverManagementView = ({ context }) => {
+const DriverManagementView = ({ context, onOpenChat, onPreviewImage, onDownloadImage }) => {
   const [selectedDriver, setSelectedDriver] = useState(null);
   const [kycStep, setKycStep] = useState(1);
   const drivers = [
@@ -27,20 +28,21 @@ const DriverManagementView = ({ context }) => {
   ];
   const filteredDrivers = context ? drivers.filter((d) => d.country === context.country) : drivers;
   return <div className="space-y-6">
-    <div className="flex justify-between items-center bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-100">
       <div>
         <h3 className="font-bold text-lg">
           {context ? `${context.country} - Ride Management` : "Ride Management"}
         </h3>
         <p className="text-xs text-slate-400 mt-1">Manage driver onboarding and vehicle verification</p>
       </div>
-      <button className="bg-primary text-white px-6 py-3 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-primary/90 shadow-lg shadow-primary/20">
+      <button className="bg-primary text-white px-6 py-3 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-primary/90 shadow-lg shadow-primary/20 w-full sm:w-auto justify-center">
         <Car size={18} /> Onboard New Driver
       </button>
     </div>
 
     <div className="glass-card rounded-3xl overflow-hidden border-none shadow-xl shadow-slate-200/40 bg-white">
-      <table className="w-full text-left border-collapse">
+      <div className="overflow-x-auto">
+      <table className="w-full text-left border-collapse min-w-[900px]">
         <thead>
           <tr className="bg-slate-50/50 border-b border-slate-100">
             <th className="p-6 text-[10px] font-bold uppercase tracking-widest text-slate-400">Driver / Vehicle</th>
@@ -54,7 +56,7 @@ const DriverManagementView = ({ context }) => {
           {filteredDrivers.map((driver, i) => <tr key={i} className="hover:bg-slate-50/50 transition-colors group">
             <td className="p-6">
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold">
+                <div className="w-10 h-10 min-w-10 min-h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold">
                   {driver.name[0]}
                 </div>
                 <div>
@@ -113,13 +115,14 @@ const DriverManagementView = ({ context }) => {
           </tr>)}
         </tbody>
       </table>
+      </div>
     </div>
 
     <AnimatePresence>
-      {selectedDriver && <div className="fixed inset-0 z-50 flex items-center justify-center p-6 sm:p-12">
+      {selectedDriver && <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 lg:p-12">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSelectedDriver(null)} className="absolute inset-0 bg-earth/40 backdrop-blur-md" />
-        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="relative max-w-2xl w-full bg-white rounded-[40px] overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
-          <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-warm">
+        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="relative max-w-2xl w-full bg-white rounded-[24px] sm:rounded-[40px] overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+          <div className="p-4 sm:p-8 border-b border-slate-100 flex justify-between items-center bg-warm">
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 bg-earth text-white rounded-2xl flex items-center justify-center text-xl font-black">
                 <Shield size={24} />
@@ -132,11 +135,19 @@ const DriverManagementView = ({ context }) => {
             <button onClick={() => setSelectedDriver(null)} className="p-2 hover:bg-slate-200 rounded-full"><X size={20} /></button>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-10 space-y-10">
+          <div className="flex-1 overflow-y-auto p-4 sm:p-10 space-y-8 sm:space-y-10">
+            <div className="flex justify-end pr-10 -mb-6">
+               <button 
+                 onClick={() => onOpenChat?.(selectedDriver.name)}
+                 className="flex items-center gap-2 bg-warm hover:bg-slate-100 text-earth px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all"
+               >
+                 <MessageSquare size={14} /> View Chat History
+               </button>
+            </div>
             {
               /* Progress Tracker */
             }
-            <div className="flex justify-between relative px-10">
+            <div className="flex justify-between relative overflow-x-auto px-4 sm:px-10 py-4">
               <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-slate-100 -translate-y-1/2 z-0" />
               {[
                 { label: "Identity", icon: UserCog },
@@ -163,12 +174,15 @@ const DriverManagementView = ({ context }) => {
             <div className="bg-warm/50 rounded-[32px] p-8 border border-earth/5">
               {kycStep === 1 && <div className="space-y-6">
                 <h4 className="font-bold flex items-center gap-2 text-earth"><FileCheck size={18} /> Government ID Verification</h4>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-4">
                     <div className="aspect-video bg-slate-200 rounded-2xl overflow-hidden relative group">
                       <img src="https://picsum.photos/seed/id-front/400/250" className="w-full h-full object-cover" alt="ID Front" />
                       <div className="absolute inset-0 bg-earth/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button className="bg-white text-earth px-4 py-2 rounded-xl text-xs font-bold">View Fullscreen</button>
+                        <button 
+                          onClick={() => onPreviewImage?.("https://picsum.photos/seed/id-front/400/250", "passport_front.jpg")}
+                          className="bg-white text-earth px-4 py-2 rounded-xl text-xs font-bold"
+                        >View Fullscreen</button>
                       </div>
                     </div>
                     <p className="text-[10px] font-bold text-center text-slate-400 uppercase">Passport / National ID Front</p>
@@ -182,7 +196,7 @@ const DriverManagementView = ({ context }) => {
               </div>}
               {kycStep === 2 && <div className="space-y-6">
                 <h4 className="font-bold flex items-center gap-2 text-earth"><Car size={18} /> Vehicle Safety Compliance</h4>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {["Front", "Side", "Interior", "Chassis", "Odometer", "Plate"].map((label) => <div key={label} className="relative aspect-[4/3] bg-slate-100 rounded-xl overflow-hidden group">
                     <img src={`https://picsum.photos/seed/car-${label}/300/300`} className="w-full h-full object-cover" alt={label} />
                     <div className="absolute top-2 right-2 bg-success text-white p-1 rounded-full"><CheckCircle2 size={12} /></div>
@@ -224,13 +238,13 @@ const DriverManagementView = ({ context }) => {
             </div>
           </div>
 
-          <div className="p-8 bg-warm border-t border-slate-100 flex gap-4">
+          <div className="p-4 sm:p-8 bg-warm border-t border-slate-100 flex flex-col sm:flex-row gap-3 sm:gap-4">
             {kycStep < 4 ? <>
-              <button onClick={() => setKycStep((prev) => Math.max(1, prev - 1))} className="px-8 py-4 rounded-2xl font-bold bg-white border border-slate-200 text-slate-400 hover:text-earth transition-all">Previous</button>
-              <button onClick={() => setKycStep((prev) => prev + 1)} className="flex-1 bg-earth text-white py-4 rounded-2xl font-bold hover:bg-earth/90 transition-all flex items-center justify-center gap-2">Continue Check <ChevronRight size={18} /></button>
+              <button onClick={() => setKycStep((prev) => Math.max(1, prev - 1))} className="px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-bold bg-white border border-slate-200 text-slate-400 hover:text-earth transition-all">Previous</button>
+              <button onClick={() => setKycStep((prev) => prev + 1)} className="flex-1 bg-earth text-white py-3 sm:py-4 rounded-2xl font-bold hover:bg-earth/90 transition-all flex items-center justify-center gap-2">Continue Check <ChevronRight size={18} /></button>
             </> : <>
-              <button onClick={() => setSelectedDriver(null)} className="flex-1 bg-white border border-coral text-coral py-4 rounded-2xl font-bold hover:bg-coral/5 transition-all">Deny Verification</button>
-              <button onClick={() => setSelectedDriver(null)} className="flex-1 bg-success text-white py-4 rounded-2xl font-bold hover:bg-success/90 transition-all">Verify & Approve</button>
+              <button onClick={() => setSelectedDriver(null)} className="flex-1 bg-white border border-coral text-coral py-3 sm:py-4 rounded-2xl font-bold hover:bg-coral/5 transition-all">Deny Verification</button>
+              <button onClick={() => setSelectedDriver(null)} className="flex-1 bg-success text-white py-3 sm:py-4 rounded-2xl font-bold hover:bg-success/90 transition-all">Verify & Approve</button>
             </>}
           </div>
         </motion.div>

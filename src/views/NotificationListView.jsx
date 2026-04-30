@@ -53,8 +53,8 @@ const NotificationListView = () => {
       /* Broadcast Composer */
     }
     <div className="lg:col-span-2 space-y-8">
-      <div className="glass-card p-10 rounded-[40px] bg-white border-none shadow-2xl shadow-slate-200/40 space-y-8 relative overflow-hidden">
-        <div className="flex justify-between items-start">
+      <div className="glass-card p-5 sm:p-10 rounded-[32px] sm:rounded-[40px] bg-white border-none shadow-2xl shadow-slate-200/40 space-y-6 sm:space-y-8 relative overflow-hidden">
+        <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
           <div>
             <h2 className="text-2xl font-black text-earth tracking-tight">Advanced Notification Suite</h2>
             <p className="text-sm text-slate-400 font-medium mt-1">Multi-channel broadcast and direct targeting system.</p>
@@ -195,7 +195,7 @@ const NotificationListView = () => {
             </div>
           </div>
 
-          <div className="flex gap-4 pt-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
             <button className="flex-1 bg-warm text-earth py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-100 transition-all">Save Draft</button>
             <button
               onClick={handleSend}

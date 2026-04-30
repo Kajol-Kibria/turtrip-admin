@@ -123,7 +123,7 @@ const TripManagementView = () => {
     </div>
 
     <AnimatePresence>
-      {selectedTrip && <div className="fixed inset-0 z-50 flex items-center justify-center p-6 sm:p-12">
+      {selectedTrip && <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 lg:p-12">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -135,7 +135,7 @@ const TripManagementView = () => {
           initial={{ scale: 0.9, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.9, opacity: 0, y: 20 }}
-          className="relative max-w-4xl w-full bg-white rounded-[40px] overflow-hidden shadow-2xl flex flex-col lg:flex-row max-h-[90vh]"
+          className="relative max-w-4xl w-full bg-white rounded-[24px] sm:rounded-[40px] overflow-hidden shadow-2xl flex flex-col lg:flex-row max-h-[90vh]"
         >
           <div className="lg:w-1/2 relative bg-slate-100 min-h-[300px] lg:min-h-full">
             <img src={selectedTrip.image} className="w-full h-full object-cover" alt={selectedTrip.title} />
@@ -174,7 +174,7 @@ const TripManagementView = () => {
               </div>
             </div>
 
-            <div className="p-8 bg-warm/50 border-t border-slate-100 flex gap-4 sticky bottom-0 bg-white">
+            <div className="p-4 sm:p-8 bg-warm/50 border-t border-slate-100 flex flex-col sm:flex-row gap-3 sm:gap-4 sticky bottom-0 bg-white">
               <button
                 onClick={() => setSelectedTrip(null)}
                 className="flex-1 bg-white border border-alert/20 text-alert py-4 rounded-2xl font-bold hover:bg-alert/5 transition-all shadow-sm"

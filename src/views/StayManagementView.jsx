@@ -17,7 +17,7 @@ import {
   ListChecks,
   Map
 } from "lucide-react";
-const StayManagementView = ({ context }) => {
+const StayManagementView = ({ context, onOpenChat, onPreviewImage, onDownloadImage }) => {
   const [selectedStay, setSelectedStay] = useState(null);
   const [activeTab, setActiveTab] = useState("All");
   const [kycStep, setKycStep] = useState(1);
@@ -75,7 +75,7 @@ const StayManagementView = ({ context }) => {
   const countryFilteredStays = context ? stays.filter((s) => s.country === context.country) : stays;
   const filteredStays = activeTab === "All" ? countryFilteredStays : countryFilteredStays.filter((s) => s.status === activeTab);
   return <div className="space-y-6">
-    <div className="flex justify-between items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
       <div className="flex bg-warm p-1 rounded-xl">
         {["All", "Pending", "Active"].map((tab) => <button
           key={tab}
@@ -88,14 +88,14 @@ const StayManagementView = ({ context }) => {
           {tab === "All" ? "All Accommodations" : tab}
         </button>)}
       </div>
-      <div className="flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 w-full md:w-auto">
         <h4 className="text-earth font-black text-xs mr-4">{context ? `${context.country} Regional Feed` : "Global Marketplace"}</h4>
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
           <input
             type="text"
             placeholder="Search by stay name..."
-            className="pl-10 pr-4 py-2 bg-warm border-none rounded-xl text-xs font-medium focus:ring-2 focus:ring-primary/20 w-64"
+            className="pl-10 pr-4 py-2 bg-warm border-none rounded-xl text-xs font-medium focus:ring-2 focus:ring-primary/20 w-full sm:w-64"
           />
         </div>
       </div>
@@ -103,7 +103,8 @@ const StayManagementView = ({ context }) => {
 
 
     <div className="glass-card rounded-3xl overflow-hidden border-none shadow-xl shadow-slate-200/40 bg-white">
-      <table className="w-full text-left border-collapse">
+      <div className="overflow-x-auto">
+      <table className="w-full text-left border-collapse min-w-[800px]">
         <thead>
           <tr className="bg-slate-50/50 border-b border-slate-100">
             <th className="p-6 text-[10px] font-bold uppercase tracking-widest text-slate-400">Stay Information</th>
@@ -173,10 +174,11 @@ const StayManagementView = ({ context }) => {
           </tr>)}
         </tbody>
       </table>
+      </div>
     </div>
 
     <AnimatePresence>
-      {selectedStay && <div className="fixed inset-0 z-50 flex items-center justify-center p-6 sm:p-12">
+      {selectedStay && <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 lg:p-12">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -188,9 +190,9 @@ const StayManagementView = ({ context }) => {
           initial={{ scale: 0.9, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.9, opacity: 0, y: 20 }}
-          className="relative max-w-5xl w-full bg-white rounded-[40px] overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
+          className="relative max-w-5xl w-full bg-white rounded-[24px] sm:rounded-[40px] overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
         >
-          <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-warm">
+          <div className="p-4 sm:p-8 border-b border-slate-100 flex justify-between items-center bg-warm">
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 bg-brand rounded-2xl flex items-center justify-center text-white shadow-xl shadow-brand/20">
                 <ShieldCheck size={32} />
@@ -203,11 +205,11 @@ const StayManagementView = ({ context }) => {
             <button onClick={() => setSelectedStay(null)} className="p-2 hover:bg-slate-200 rounded-full transition-colors text-slate-400"><X size={20} /></button>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-10 space-y-10">
+          <div className="flex-1 overflow-y-auto p-4 sm:p-10 space-y-8 sm:space-y-10">
             {
               /* Progress Tracker */
             }
-            <div className="flex justify-between relative px-10">
+            <div className="flex justify-between relative overflow-x-auto px-4 sm:px-10 py-4">
               <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-slate-100 -translate-y-1/2 z-0" />
               {[
                 { label: "Documents", icon: FileCheck },
@@ -235,18 +237,23 @@ const StayManagementView = ({ context }) => {
               <div className="lg:col-span-2">
                 <div className="bg-warm/50 rounded-[32px] p-8 border border-earth/5 min-h-[400px]">
                   {kycStep === 1 && <div className="space-y-8">
-                    <div className="flex justify-between items-center">
+                    <div className="flex flex-wrap gap-1 justify-between items-center">
                       <h4 className="font-bold flex items-center gap-2 text-earth"><FileText size={18} /> Business Registration Review</h4>
                       <span className="text-[10px] font-black bg-success/10 text-success px-3 py-1 rounded-full uppercase">AI Verified</span>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
                       <div className="space-y-4">
                         <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Certificate of Incorporation</p>
                         <div className="aspect-[4/3] bg-slate-200 rounded-3xl overflow-hidden relative group shadow-xl">
                           <img src="https://picsum.photos/seed/cert/400/300" className="w-full h-full object-cover" />
                           <div className="absolute inset-0 bg-earth/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                            <Eye size={32} className="text-white" />
+                            <button 
+                              onClick={() => onPreviewImage?.("https://picsum.photos/seed/cert/400/300", "incorporation_cert.jpg")}
+                              className="text-white"
+                            >
+                              <Eye size={32} />
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -265,7 +272,7 @@ const StayManagementView = ({ context }) => {
 
                   {kycStep === 2 && <div className="space-y-8">
                     <h4 className="font-bold flex items-center gap-2 text-earth"><Activity size={18} /> Health & Fire Safety Compliance</h4>
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                       {["Fire Exit Plan", "Kitchen Hygiene", "Pool Safety"].map((item) => <div key={item} className="space-y-3">
                         <div className="aspect-square bg-slate-100 rounded-2xl overflow-hidden border border-slate-200">
                           <img src={`https://picsum.photos/seed/safety-${item}/200/200`} className="w-full h-full object-cover" />
@@ -281,7 +288,7 @@ const StayManagementView = ({ context }) => {
                   {kycStep === 3 && <div className="space-y-8">
                     <h4 className="font-bold flex items-center gap-2 text-earth"><ListChecks size={18} /> Room Tier & Asset Audit</h4>
                     <div className="space-y-6">
-                      {selectedStay.rooms.map((room, i) => <div key={i} className="flex items-center gap-6 p-4 bg-white rounded-3xl border border-earth/5">
+                      {selectedStay.rooms.map((room, i) => <div key={i} className="flex flex-col md:flex-row items-center gap-6 p-4 bg-white rounded-3xl border border-earth/5">
                         <div className="w-24 h-24 rounded-2xl overflow-hidden shrink-0">
                           <img src={room.image} className="w-full h-full object-cover" />
                         </div>
@@ -328,7 +335,10 @@ const StayManagementView = ({ context }) => {
                   <div className="pt-6 border-t border-slate-200">
                     <h5 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Legal Actions</h5>
                     <div className="space-y-3">
-                      <button className="w-full bg-white text-earth py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest border border-slate-200 hover:bg-slate-50">View Chat History</button>
+                      <button 
+                        onClick={() => onOpenChat?.(selectedStay.name)}
+                        className="w-full bg-white text-earth py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest border border-slate-200 hover:bg-slate-50"
+                      >View Chat History</button>
                       <button className="w-full bg-white text-earth py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest border border-slate-200 hover:bg-slate-50">Reservation Logs</button>
                     </div>
                   </div>
@@ -337,7 +347,7 @@ const StayManagementView = ({ context }) => {
             </div>
           </div>
 
-          <div className="p-8 bg-warm border-t border-slate-100 flex gap-4">
+          <div className="p-4 sm:p-8 bg-warm border-t border-slate-100 flex flex-col sm:flex-row gap-3 sm:gap-4">
             {kycStep < 4 ? <>
               <button onClick={() => setKycStep((prev) => Math.max(1, prev - 1))} className="px-8 py-4 rounded-2xl font-bold bg-white border border-slate-200 text-slate-400 hover:text-earth transition-all">Previous</button>
               <button onClick={() => setKycStep((prev) => prev + 1)} className="flex-1 bg-primary text-white py-4 rounded-2xl font-bold hover:bg-primary/90 transition-all flex items-center justify-center gap-2">Continue Check <ChevronRight size={18} /></button>

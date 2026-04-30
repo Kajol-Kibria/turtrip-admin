@@ -1,8 +1,8 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Manjaro Admin',
-  description: 'Multirole Management System',
+  title: 'Manjaro Admin Panel',
+  description: 'Comprehensive administrative dashboard for Manjaro, managing users, guides, bookings, payments, and content moderation.',
 };
 
 export default function RootLayout({ children }) {

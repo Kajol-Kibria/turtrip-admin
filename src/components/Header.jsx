@@ -21,7 +21,7 @@ export default function Header({
   const [isAlertsOpen, setIsAlertsOpen] = useState(false);
 
   return (
-    <header className="h-20 flex-none bg-white border-b border-slate-200/60 px-8 flex items-center justify-between sticky top-0 z-40">
+    <header className="h-14 sm:h-20 flex-none bg-white border-b border-slate-200/60 px-3 sm:px-6 lg:px-8 flex items-center justify-between sticky top-0 z-40">
       <div className="flex items-center gap-4">
         {!isSidebarOpen && (
           <button 
@@ -31,7 +31,7 @@ export default function Header({
             <Menu size={20} />
           </button>
         )}
-        <h2 className="text-xl font-bold text-earth capitalize">
+        <h2 className="text-base sm:text-xl font-bold text-earth capitalize truncate">
           {currentView.replace('_', ' ')}
         </h2>
       </div>
@@ -59,7 +59,7 @@ export default function Header({
                 initial={{ opacity: 0, y: 10, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                className="absolute top-12 right-0 w-80 bg-white rounded-3xl shadow-2xl border border-slate-100 z-50 overflow-hidden"
+                className="absolute top-12 -right-2 sm:right-0 w-[calc(100vw-2rem)] sm:w-80 bg-white rounded-3xl shadow-2xl border border-slate-100 z-50 overflow-hidden"
               >
                 <div className="p-4 border-b border-slate-50 flex justify-between items-center bg-slate-50/50">
                   <h3 className="text-xs font-black text-earth uppercase tracking-widest italic">Live Alerts</h3>
@@ -106,8 +106,8 @@ export default function Header({
           )}
         </AnimatePresence>
 
-        <div className="h-6 w-px bg-slate-200 mx-2" />
-        <button className="flex items-center gap-3 px-4 py-2 hover:bg-warm rounded-xl transition-colors border border-transparent hover:border-slate-100">
+        <div className="h-6 w-px bg-slate-200 mx-1 sm:mx-2 hidden sm:block" />
+        <button className="hidden sm:flex items-center gap-3 px-4 py-2 hover:bg-warm rounded-xl transition-colors border border-transparent hover:border-slate-100">
           <div className="text-right hidden sm:block">
             <p className="text-xs font-bold leading-none text-earth">21 Apr 2026</p>
             <p className="text-[10px] text-slate-400 font-medium mt-1">Current Sync</p>

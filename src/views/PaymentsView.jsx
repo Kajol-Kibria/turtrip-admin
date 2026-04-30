@@ -7,12 +7,12 @@ import {
 const PaymentsView = () => {
   const [metricType, setMetricType] = useState("net");
   return <div className="space-y-6">
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div className="glass-card p-8 rounded-[40px] bg-earth text-white border-none shadow-2xl shadow-earth/30 relative overflow-hidden group">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* <div className="glass-card p-4 sm:p-8 rounded-[40px] bg-earth text-white border-none shadow-2xl shadow-earth/30 relative overflow-hidden group">
         <div className="relative z-10">
           <div className="flex justify-between items-center mb-3">
             <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Total Payments</p>
-            <div className="flex bg-white/10 p-1 rounded-xl">
+            <div className="flex bg-white/10 p-1 rounded-xl flex-wrap">
               <button
                 onClick={() => setMetricType("net")}
                 className={cn("px-3 py-1 rounded-lg text-[9px] font-black uppercase transition-all", metricType === "net" ? "bg-earth text-white shadow-lg" : "text-earth hover:text-earth")}
@@ -36,11 +36,11 @@ const PaymentsView = () => {
           </div>
         </div>
         <div className="absolute -right-10 -bottom-10 w-48 h-48 bg-white/5 rounded-full blur-3xl group-hover:bg-white/10 transition-all" />
-      </div>
+      </div> */}
       <div className="glass-card p-6 rounded-3xl border-none shadow-xl shadow-slate-200/40 flex flex-col justify-between">
         <div>
           <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Pending Releases</p>
-          <h2 className="text-2xl font-black text-primary">12 Transactions</h2>
+          <h2 className="text-2xl font-black text-primary mb-2">12 Transactions</h2>
         </div>
         <button className="w-full bg-primary text-white py-3 rounded-2xl text-xs font-bold hover:bg-primary/90 transition-all">
           Manage Queue
@@ -49,7 +49,7 @@ const PaymentsView = () => {
       <div className="glass-card p-6 rounded-3xl border-none shadow-xl shadow-slate-200/40 flex flex-col justify-between">
         <div>
           <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Refund Requests</p>
-          <h2 className="text-2xl font-black text-coral">3 Open</h2>
+          <h2 className="text-2xl font-black text-coral mb-2">3 Open</h2>
         </div>
         <button className="w-full bg-coral/10 text-coral border border-coral/20 py-3 rounded-2xl text-xs font-bold hover:bg-coral/20 transition-all">
           Review Requests
@@ -63,7 +63,7 @@ const PaymentsView = () => {
         <button className="text-primary text-sm font-bold hover:underline">Export CSV</button>
       </div>
       <div className="overflow-x-auto">
-        <table className="w-full text-left">
+        <table className="w-full text-left min-w-[700px]">
           <thead className="bg-slate-50 border-b border-slate-100">
             <tr>
               <th className="p-6 text-[10px] font-bold uppercase tracking-widest text-slate-400">Date</th>

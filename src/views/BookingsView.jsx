@@ -39,7 +39,8 @@ const BookingsView = () => {
   ];
   return <div className="space-y-6">
     <div className="glass-card rounded-3xl overflow-hidden border-none shadow-xl shadow-slate-200/40 bg-white">
-      <table className="w-full text-left border-collapse">
+      <div className="overflow-x-auto">
+      <table className="w-full text-left border-collapse min-w-[780px]">
         <thead>
           <tr className="bg-slate-50/50 border-b border-slate-100">
             <th className="p-6 text-[10px] font-bold uppercase tracking-widest text-slate-400">Order ID</th>
@@ -90,10 +91,11 @@ const BookingsView = () => {
           </tr>)}
         </tbody>
       </table>
+      </div>
     </div>
 
     <AnimatePresence>
-      {selectedBooking && <div className="fixed inset-0 z-50 flex items-center justify-center p-6 sm:p-12">
+      {selectedBooking && <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 lg:p-12">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -105,7 +107,7 @@ const BookingsView = () => {
           initial={{ scale: 0.9, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.9, opacity: 0, y: 20 }}
-          className="relative max-w-lg w-full bg-white rounded-[32px] overflow-hidden shadow-2xl flex flex-col"
+          className="relative max-w-lg w-full bg-white rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-2xl flex flex-col"
         >
           <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
             <div>

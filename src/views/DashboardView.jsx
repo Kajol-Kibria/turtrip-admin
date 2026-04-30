@@ -63,13 +63,13 @@ const DashboardView = ({ context, onNavigate }) => {
     {
       /* Contextual Header */
     }
-    {context && <div className="bg-earth p-8 rounded-[32px] text-white flex flex-col md:flex-row justify-between items-center gap-6 shadow-2xl shadow-earth/20 relative overflow-hidden">
+    {context && <div className="bg-earth p-4 sm:p-8 rounded-[24px] sm:rounded-[32px] text-white flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6 shadow-2xl shadow-earth/20 relative overflow-hidden">
       <div className="relative z-10">
         <div className="flex items-center gap-2 mb-2">
           <span className="px-3 py-1 bg-brand rounded-full text-[10px] font-black uppercase tracking-widest text-white shadow-xl shadow-brand/20">{context.country}</span>
           <span className="px-3 py-1 bg-white/20 rounded-full text-[10px] font-black uppercase tracking-widest text-white">{context.supportTask.toUpperCase()} PROVIDER SUPPORT</span>
         </div>
-        <h1 className="text-3xl font-black tracking-tight leading-none">{context.country} - {context.supportTask.charAt(0).toUpperCase() + context.supportTask.slice(1)} Dashboard</h1>
+        <h1 className="text-xl sm:text-3xl font-black tracking-tight leading-none">{context.country} - {context.supportTask.charAt(0).toUpperCase() + context.supportTask.slice(1)} Dashboard</h1>
         <p className="text-white/60 font-medium mt-2">Personalized marketplace metrics for your assigned jurisdiction.</p>
       </div>
       <Activity className="absolute -right-10 -bottom-10 w-48 h-48 text-white/5 rotate-12" />
@@ -91,7 +91,7 @@ const DashboardView = ({ context, onNavigate }) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: i * 0.1 }}
-        className="glass-card p-6 rounded-[32px] bg-white border-none shadow-xl shadow-slate-200/40 group hover:-translate-y-1 transition-all"
+        className="glass-card p-4 sm:p-6 rounded-[24px] sm:rounded-[32px] bg-white border-none shadow-xl shadow-slate-200/40 group hover:-translate-y-1 transition-all"
       >
         <div className="flex justify-between items-start mb-4">
           <div className={cn("p-4 rounded-2xl transition-colors", stat.color.replace("text", "bg") + "/10")}>
@@ -111,7 +111,7 @@ const DashboardView = ({ context, onNavigate }) => {
         /* Marketplace Performance Chart */
       }
       <div className="lg:col-span-2 space-y-8">
-        <div className="glass-card p-8 rounded-[40px] bg-white border-none shadow-xl shadow-slate-200/40">
+        <div className="glass-card p-4 sm:p-8 rounded-[32px] sm:rounded-[40px] bg-white border-none shadow-xl shadow-slate-200/40">
           <div className="flex justify-between items-center mb-8">
             <h3 className="text-xl font-black text-earth tracking-tight">{context ? "System Activeness" : "Marketplace Activity"}</h3>
             <select className="bg-warm border-none rounded-xl text-[10px] font-black uppercase tracking-widest px-4 py-2">
@@ -120,7 +120,7 @@ const DashboardView = ({ context, onNavigate }) => {
               {!context && <option>Last 30 Days</option>}
             </select>
           </div>
-          <div className="h-80 w-full">
+          <div className="h-60 sm:h-80 w-full">
             {isMounted && (
               <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                 <AreaChart data={context ? ACTIVENESS_DATA : REVENUE_DATA}>

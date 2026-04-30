@@ -39,12 +39,12 @@ const AlertsCenterView = () => {
     return a.cat === filter;
   });
   return <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-    <div className="bg-white p-10 rounded-[40px] shadow-xl shadow-slate-200/40 border-none flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+    <div className="bg-white p-6 sm:p-10 rounded-[32px] sm:rounded-[40px] shadow-xl shadow-slate-200/40 border-none flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6">
       <div>
         <h2 className="text-3xl font-black text-earth tracking-tight">Alerts Center</h2>
         <p className="text-sm font-medium text-slate-400 mt-2 italic">Real-time system health and user integrity monitoring log.</p>
       </div>
-      <div className="flex bg-warm p-1.5 rounded-2xl border border-earth/5">
+      <div className="flex bg-warm p-1.5 rounded-2xl border border-earth/5 overflow-x-auto w-full md:w-auto">
         {[
           { id: "all", label: "All Activity" },
           { id: "critical", label: "Critical Only" },
@@ -54,7 +54,7 @@ const AlertsCenterView = () => {
           key={t.id}
           onClick={() => setFilter(t.id)}
           className={cn(
-            "px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all",
+            "px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap",
             filter === t.id ? "bg-earth text-white shadow-lg" : "text-slate-400 hover:text-earth"
           )}
         >
@@ -72,7 +72,7 @@ const AlertsCenterView = () => {
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ delay: i * 0.05 }}
           key={alert2.id}
-          className="glass-card p-6 rounded-[32px] bg-white border-none shadow-xl shadow-slate-200/40 flex flex-col md:flex-row items-center justify-between gap-6 hover:shadow-2xl hover:-translate-y-1 transition-all group cursor-pointer"
+          className="glass-card p-4 sm:p-6 rounded-[24px] sm:rounded-[32px] bg-white border-none shadow-xl shadow-slate-200/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6 hover:shadow-2xl hover:-translate-y-1 transition-all group cursor-pointer"
         >
           <div className="flex items-center gap-6 flex-1">
             <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center shadow-inner", alert2.color.replace("text-", "bg-").replace("500", "100").replace("success", "success/10").replace("coral", "coral/10").replace("primary", "primary/10"))}>
@@ -86,7 +86,7 @@ const AlertsCenterView = () => {
               <p className="text-sm font-medium text-slate-500 leading-relaxed">{alert2.desc}</p>
             </div>
           </div>
-          <div className="text-right flex flex-col md:items-end gap-3 min-w-[200px]">
+          <div className="text-left sm:text-right flex flex-row sm:flex-col items-center sm:items-end gap-3 w-full sm:w-auto sm:min-w-[200px]">
             <div className="flex items-center justify-end gap-2 text-slate-400">
               <Clock size={16} />
               <span className="text-xs font-black italic">{alert2.time}</span>

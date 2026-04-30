@@ -15,7 +15,8 @@ import {
   Activity,
   User,
   ExternalLink,
-  X
+  X,
+  MessageSquare
 } from "lucide-react";
 
 const MOCK_USERS = [
@@ -43,7 +44,7 @@ const MOCK_USERS = [
 
 const UserProfileModal = ({ user, onClose }) => {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-6 sm:p-12">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 lg:p-12">
       <motion.div 
         initial={{ opacity: 0 }} 
         animate={{ opacity: 1 }} 
@@ -55,9 +56,9 @@ const UserProfileModal = ({ user, onClose }) => {
         initial={{ scale: 0.9, opacity: 0, y: 20 }} 
         animate={{ scale: 1, opacity: 1, y: 0 }} 
         exit={{ scale: 0.9, opacity: 0, y: 20 }} 
-        className="relative max-w-4xl w-full bg-white rounded-[40px] overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
+        className="relative max-w-4xl w-full bg-white rounded-[24px] sm:rounded-[40px] overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
       >
-        <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+        <div className="p-4 sm:p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-primary text-white rounded-2xl flex items-center justify-center shadow-lg shadow-primary/20">
               <User size={24} />
@@ -72,7 +73,7 @@ const UserProfileModal = ({ user, onClose }) => {
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-8 space-y-8">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-8 space-y-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-1 space-y-6">
               <div className="bg-slate-50 rounded-3xl p-6 border border-slate-100 text-center">
@@ -169,34 +170,35 @@ const UserProfileModal = ({ user, onClose }) => {
           </div>
         </div>
 
-        <div className="p-8 bg-slate-50 border-t border-slate-100 flex gap-4">
-          <button onClick={onClose} className="px-8 py-4 rounded-2xl font-bold bg-white border border-slate-200 text-slate-500 hover:text-slate-900 transition-all">Close</button>
-          <button className="flex-1 bg-primary text-white py-4 rounded-2xl font-bold hover:bg-primary/90 transition-all shadow-xl shadow-primary/20">Save Changes</button>
+        <div className="p-4 sm:p-8 bg-slate-50 border-t border-slate-100 flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <button onClick={onClose} className="px-8 py-3 sm:py-4 rounded-2xl font-bold bg-white border border-slate-200 text-slate-500 hover:text-slate-900 transition-all">Close</button>
+          <button className="flex-1 bg-primary text-white py-3 sm:py-4 rounded-2xl font-bold hover:bg-primary/90 transition-all shadow-xl shadow-primary/20">Save Changes</button>
         </div>
       </motion.div>
     </div>
   );
 };
 
-const UserManagementView = () => {
+const UserManagementView = ({ onOpenChat }) => {
   const [selectedUser, setSelectedUser] = useState(null);
 
   return (
     <div className="space-y-6">
       {/* List Header */}
-      <div className="flex justify-between items-center bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-100">
         <div>
           <h3 className="font-bold text-lg">User Management</h3>
           <p className="text-xs text-slate-400 mt-1">View and manage all registered platform users</p>
         </div>
-        <button className="bg-primary text-white px-6 py-3 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all">
+        <button className="bg-primary text-white px-6 py-3 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all w-full sm:w-auto justify-center">
           <Users size={18} /> Export Users
         </button>
       </div>
 
       {/* User Table */}
       <div className="glass-card rounded-3xl overflow-hidden border-none shadow-xl shadow-slate-200/40 bg-white">
-        <table className="w-full text-left border-collapse">
+        <div className="overflow-x-auto">
+        <table className="w-full text-left border-collapse min-w-[700px]">
           <thead>
             <tr className="bg-slate-50/50 border-b border-slate-100">
               <th className="p-6 text-[10px] font-bold uppercase tracking-widest text-slate-400">User Details</th>
@@ -232,17 +234,27 @@ const UserManagementView = () => {
                 </td>
                 <td className="p-6 text-xs text-slate-400">{user.activity}</td>
                 <td className="p-6">
-                  <button 
-                    onClick={() => setSelectedUser(user)}
-                    className="text-primary font-bold text-xs hover:underline flex items-center gap-1"
-                  >
-                    View Profile <ExternalLink size={12} />
-                  </button>
+                  <div className="flex items-center gap-3">
+                    <button 
+                      onClick={() => setSelectedUser(user)}
+                      className="text-primary font-bold text-xs hover:underline flex items-center gap-1"
+                    >
+                      View Profile <ExternalLink className='hidden md:block' size={12} />
+                    </button>
+                    <button 
+                      onClick={() => onOpenChat?.(user.name)}
+                      className="p-2 hover:bg-slate-100 rounded-xl text-slate-400 hover:text-primary transition-colors"
+                      title="View Chat History"
+                    >
+                      <MessageSquare size={16} />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        </div>
       </div>
 
       <AnimatePresence>

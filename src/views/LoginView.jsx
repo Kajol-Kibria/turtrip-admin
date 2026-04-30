@@ -26,7 +26,7 @@ const LoginView = ({ onLogin }) => {
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="glass-card max-w-md w-full p-10 rounded-[40px] bg-white border-none shadow-2xl shadow-earth/5"
+      className="glass-card max-w-md w-full p-6 sm:p-10 rounded-[32px] sm:rounded-[40px] bg-white border-none shadow-2xl shadow-earth/5"
     >
       <div className="flex flex-col items-center text-center mb-10">
         <div className="w-16 h-16 bg-brand rounded-3xl flex items-center justify-center text-white rotate-6 mb-6 shadow-xl shadow-brand/30">
@@ -206,14 +206,14 @@ const SettingsView = () => {
       {
         /* Global Regions Wrapper */
       }
-      <div className="glass-card p-8 rounded-[40px] bg-earth text-white border-none shadow-xl shadow-earth/20">
+      {/* <div className="glass-card p-8 rounded-[40px] bg-earth text-white border-none shadow-xl shadow-earth/20">
         <div className="flex justify-between items-center mb-6">
           <h4 className="font-black text-lg">Expansion Mode</h4>
           <Globe className="text-white/20" size={32} />
         </div>
         <p className="text-white/60 text-sm font-medium leading-relaxed">System is currently processing registrations from 12 countries. M-Pesa & Stripe automatic routing enabled.</p>
         <button className="w-full mt-8 bg-white/10 hover:bg-white/20 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all">Download regional report</button>
-      </div>
+      </div> */}
     </div>
   </div>;
 };

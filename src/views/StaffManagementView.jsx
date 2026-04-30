@@ -25,18 +25,18 @@ const StaffManagementView = () => {
       setStaff(staff.filter(s => s.id !== id));
    };
    return <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
          <div>
             <h2 className="text-2xl font-black text-earth tracking-tight">Staff Onboarding</h2>
             <p className="text-sm text-slate-400 font-medium">Manage and provision Customer Support Officers across regions.</p>
          </div>
-         <div className="flex gap-3">
-            <button className="bg-white border border-slate-200 px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-slate-50 transition-all flex items-center gap-2">
+         <div className="flex gap-3 w-full sm:w-auto">
+            <button className="flex-1 sm:flex-none bg-white border border-slate-200 px-4 sm:px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-slate-50 transition-all flex items-center justify-center gap-2">
                <FileText size={16} /> Import CSV
             </button>
             <button
                onClick={() => setShowAddModal(true)}
-               className="bg-primary text-white px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest shadow-xl shadow-primary/20 hover:bg-primary/90 transition-all flex items-center gap-2"
+               className="flex-1 sm:flex-none bg-primary text-white px-4 sm:px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest shadow-xl shadow-primary/20 hover:bg-primary/90 transition-all flex items-center justify-center gap-2"
             >
                <UserPlus size={16} /> Add New Officer
             </button>
@@ -44,7 +44,8 @@ const StaffManagementView = () => {
       </div>
 
       <div className="glass-card rounded-[32px] overflow-hidden bg-white shadow-xl shadow-slate-200/40 border-none">
-         <table className="w-full text-left border-collapse">
+         <div className="overflow-x-auto">
+         <table className="w-full text-left border-collapse min-w-[850px]">
             <thead>
                <tr className="bg-warm/50 border-b border-earth/5">
                   <th className="p-6 text-[10px] font-black uppercase tracking-widest text-slate-400">Officer Info</th>
@@ -104,6 +105,7 @@ const StaffManagementView = () => {
                </tr>)}
             </tbody>
          </table>
+         </div>
       </div>
 
       <AnimatePresence>
@@ -127,7 +129,7 @@ const StaffManagementView = () => {
                </div>
 
                <div className="space-y-6">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                      <div className="space-y-2">
                         <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest px-1">Full Name</label>
                         <input className="w-full px-5 py-3 bg-warm/50 border border-earth/5 rounded-2xl text-sm font-bold" placeholder="e.g. John Wick" />
@@ -137,7 +139,7 @@ const StaffManagementView = () => {
                         <input className="w-full px-5 py-3 bg-warm/50 border border-earth/5 rounded-2xl text-sm font-bold" placeholder="support@aturtrip.com" />
                      </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                      <div className="space-y-2">
                         <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest px-1">Country</label>
                         <select className="w-full px-5 py-3 bg-warm/50 border border-earth/5 rounded-2xl text-sm font-bold">

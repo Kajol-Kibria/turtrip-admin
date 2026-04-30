@@ -22,7 +22,7 @@ const SettingsView = () => {
     {
       /* Pricing & Fees Section */
     }
-    <div className="glass-card p-8 rounded-[40px] bg-white border-none shadow-xl shadow-slate-200/40 space-y-8">
+    <div className="glass-card p-5 sm:p-8 rounded-[32px] sm:rounded-[40px] bg-white border-none shadow-xl shadow-slate-200/40 space-y-6 sm:space-y-8">
     <div className="flex flex-col md:flex-row items-center justify-between gap-2">
       <div>
         <h3 className="text-xl font-black text-earth tracking-tight">Platform Financials</h3>
@@ -76,7 +76,7 @@ const SettingsView = () => {
       /* Operational Policies */
     }
     <div className="space-y-8">
-      <div className="glass-card p-8 rounded-[40px] bg-white border-none shadow-xl shadow-slate-200/40 space-y-8">
+      <div className="glass-card p-5 sm:p-8 rounded-[32px] sm:rounded-[40px] bg-white border-none shadow-xl shadow-slate-200/40 space-y-6 sm:space-y-8">
         <div>
           <h3 className="text-xl font-black text-earth tracking-tight">Marketplace Compliance</h3>
           <p className="text-sm text-slate-400 font-medium">Define safety and operational standards.</p>

@@ -71,6 +71,15 @@ export default function Sidebar({
   return (
     <AnimatePresence>
       {isSidebarOpen && (
+        <>
+        {/* Mobile backdrop overlay */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setIsSidebarOpen(false)}
+          className="fixed inset-0 bg-earth/30 backdrop-blur-sm z-40 lg:hidden"
+        />
         <motion.aside
           initial={{ x: -280, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -79,7 +88,7 @@ export default function Sidebar({
           className="fixed inset-y-0 left-0 w-[280px] bg-white border-r border-slate-200 z-50 lg:relative flex flex-col"
         >
           <div className="flex flex-col h-full">
-            <div className="p-8">
+            <div className="p-5 lg:p-8">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-brand rounded-xl flex items-center justify-center text-white rotate-6 shadow-lg shadow-brand/20">
                   <Mountain size={24} />
@@ -105,7 +114,7 @@ export default function Sidebar({
               ))}
             </nav>
 
-            <div className="p-6">
+            <div className="p-4 lg:p-6">
               <div className="bg-warm rounded-2xl p-4 border border-slate-100">
                 <div className="flex items-center gap-3 mb-3">
                   <img 
@@ -135,6 +144,7 @@ export default function Sidebar({
             <X size={16} className="text-slate-500" />
           </button>
         </motion.aside>
+        </>
       )}
     </AnimatePresence>
   );

@@ -25,7 +25,7 @@ const ComplianceView = () => {
     {
       /* Policy Editor */
     }
-    <div className="glass-card p-10 rounded-[40px] bg-white border-none shadow-xl shadow-slate-200/40 space-y-8 flex flex-col">
+    <div className="glass-card p-5 sm:p-10 rounded-[32px] sm:rounded-[40px] bg-white border-none shadow-xl shadow-slate-200/40 space-y-6 sm:space-y-8 flex flex-col">
       <div className="flex justify-between items-start">
         <div>
           <h3 className="text-xl font-black text-earth tracking-tight">Global Compliance Engine</h3>
@@ -56,7 +56,7 @@ const ComplianceView = () => {
       </div>
 
       <div className="space-y-6 flex-1">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
             <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Target Region</label>
             <select
@@ -130,7 +130,7 @@ const ComplianceView = () => {
           <p className="text-sm font-medium text-slate-400 mt-2">Manage platform-wide bans for rogue identities and non-compliant actors.</p>
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
           <input type="text" placeholder="IP, Email, or Device ID..." className="flex-1 px-6 py-4 bg-slate-50 border-none rounded-2xl text-sm font-bold placeholder:text-slate-300" />
           <button className="bg-coral text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-coral/20 hover:opacity-90 active:scale-95 transition-all">Ban ID</button>
         </div>

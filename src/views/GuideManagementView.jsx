@@ -11,9 +11,10 @@ import {
   Globe,
   Shield,
   UserCheck,
-  FileCheck
+  FileCheck,
+  MessageSquare
 } from "lucide-react";
-const GuideManagementView = ({ context }) => {
+const GuideManagementView = ({ context, onOpenChat }) => {
   const [selectedGuide, setSelectedGuide] = useState(null);
   const [kycStep, setKycStep] = useState(1);
   const guides = [
@@ -24,14 +25,14 @@ const GuideManagementView = ({ context }) => {
   ];
   const filteredGuides = context ? guides.filter((g) => g.country === context.country) : guides;
   return <div className="space-y-6">
-    <div className="flex justify-between items-center bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-100">
       <div>
         <h3 className="font-bold text-lg">
           {context ? `${context.country} - Guide Management` : "Guide Management"}
         </h3>
         <p className="text-xs text-slate-400 mt-1">Verify credentials for solo guides and agencies</p>
       </div>
-      <div className="flex bg-warm p-1 rounded-xl">
+      <div className="flex bg-warm p-1 rounded-xl overflow-x-auto w-full sm:w-auto">
         {["All", "Individual", "Agencies", "Pending"].map((tab, i) => <button key={tab} className={cn("px-4 py-2 text-xs font-bold rounded-lg transition-all", i === 0 ? "bg-white shadow-sm text-primary" : "text-slate-400 hover:text-slate-600")}>
           {tab}
         </button>)}
@@ -39,7 +40,7 @@ const GuideManagementView = ({ context }) => {
     </div>
 
     <div className="grid grid-cols-1 gap-4">
-      {filteredGuides.map((guide, i) => <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }} key={i} className="glass-card p-5 rounded-2xl bg-white flex items-center justify-between">
+      {filteredGuides.map((guide, i) => <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }} key={i} className="glass-card p-4 sm:p-5 rounded-2xl bg-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary font-bold text-lg">
             {guide.name[0]}
@@ -53,7 +54,7 @@ const GuideManagementView = ({ context }) => {
             </div>
           </div>
         </div>
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-4 sm:gap-8 flex-wrap">
           <div className="text-center">
             <p className="text-[10px] uppercase tracking-wider font-bold text-slate-400 mb-1">KYC</p>
             <div className="flex items-center gap-1.5 justify-center">
@@ -89,10 +90,10 @@ const GuideManagementView = ({ context }) => {
     </div>
 
     <AnimatePresence>
-      {selectedGuide && <div className="fixed inset-0 z-50 flex items-center justify-center p-6 sm:p-12">
+      {selectedGuide && <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 lg:p-12">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSelectedGuide(null)} className="absolute inset-0 bg-earth/40 backdrop-blur-md" />
-        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="relative max-w-2xl w-full bg-white rounded-[40px] overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
-          <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-warm">
+        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="relative max-w-2xl w-full bg-white rounded-[24px] sm:rounded-[40px] overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+          <div className="p-4 sm:p-8 border-b border-slate-100 flex justify-between items-center bg-warm">
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 bg-earth text-white rounded-2xl flex items-center justify-center text-xl font-black">
                 <Shield size={24} />
@@ -105,11 +106,19 @@ const GuideManagementView = ({ context }) => {
             <button onClick={() => setSelectedGuide(null)} className="p-2 hover:bg-slate-200 rounded-full"><X size={20} /></button>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-10 space-y-10">
+          <div className="flex-1 overflow-y-auto p-4 sm:p-10 space-y-8 sm:space-y-10">
+            <div className="flex justify-end pr-10 -mb-6">
+               <button 
+                 onClick={() => onOpenChat?.(selectedGuide.name)}
+                 className="flex items-center gap-2 bg-warm hover:bg-slate-100 text-earth px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all"
+               >
+                 <MessageSquare size={14} /> View Chat History
+               </button>
+            </div>
             {
               /* Progress Tracker */
             }
-            <div className="flex justify-between relative px-10">
+            <div className="flex justify-between relative overflow-x-auto px-4 sm:px-10 py-4">
               <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-slate-100 -translate-y-1/2 z-0" />
               {[
                 { label: "Documents", icon: FileCheck },
@@ -133,7 +142,7 @@ const GuideManagementView = ({ context }) => {
             <div className="bg-warm/50 rounded-[32px] p-8 border border-earth/5">
               {kycStep === 1 && <div className="space-y-6">
                 <h4 className="font-bold flex items-center gap-2 text-earth"><CreditCard size={18} /> Official Certification Review</h4>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {selectedGuide.docs.map((doc) => <div key={doc} className="group relative aspect-video bg-slate-100 rounded-2xl overflow-hidden border border-slate-200 hover:border-earth transition-colors cursor-pointer shadow-sm">
                     <img src={`https://picsum.photos/seed/${doc}/400/250`} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all transform group-hover:scale-105" alt={doc} referrerPolicy="no-referrer" />
                     <div className="absolute bottom-0 left-0 right-0 p-3 bg-white/90 backdrop-blur-sm border-t border-slate-100">
@@ -171,7 +180,7 @@ const GuideManagementView = ({ context }) => {
             </div>
           </div>
 
-          <div className="p-8 bg-warm border-t border-slate-100 flex gap-4">
+          <div className="p-4 sm:p-8 bg-warm border-t border-slate-100 flex flex-col sm:flex-row gap-3 sm:gap-4">
             {kycStep < 3 ? <>
               <button onClick={() => setKycStep((prev) => Math.max(1, prev - 1))} className="px-8 py-4 rounded-2xl font-bold bg-white border border-slate-200 text-slate-400 hover:text-earth transition-all">Back</button>
               <button onClick={() => setKycStep((prev) => prev + 1)} className="flex-1 bg-primary text-white py-4 rounded-2xl font-bold hover:bg-primary/90 transition-all flex items-center justify-center gap-2">Next Stage <ChevronRight size={18} /></button>
